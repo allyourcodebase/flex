@@ -1,0 +1,17 @@
+.{
+    .name = "flex",
+    // This is a [Semantic Version](https://semver.org/).
+    // In a future version of Zig it will be used for package deduplication.
+    .version = "2.6.4",
+    .dependencies = .{
+        .@"flex-generated-src" = .{
+            .url = "https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
+            .hash = "122070327bfea3c08a1cb2dc29e24ea613e9b3a167186cb2a63813393bd6c7994998",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "LICENSE.md",
+    },
+}
