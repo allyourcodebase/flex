@@ -27,7 +27,7 @@ pub fn build(b: *std.Build) void {
     exe.root_module.addCMacro("HAVE_ASSERT_H", "");
     exe.root_module.addCMacro("HAVE_LIMITS_H", "");
     exe.root_module.addCMacro("HAVE_NETINET_IN_H", "");
-    exe.root_module.addCMacro("M4", "m4"); // path to default m4 binary
+    exe.root_module.addCMacro("M4", "\"m4\""); // path to default m4 binary
 
     exe.root_module.addIncludePath(flex.path("src"));
     exe.root_module.addCSourceFile(.{ .file = flex.path("src/buf.c") });
