@@ -15,6 +15,9 @@ pub fn build(b: *std.Build) void {
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{});
 
+    // TODO: depend on an M4 implementation through build.zig.zon?
+    const m4_path = b.option([]const u8, "M4", "set the path to the default M4 binary") orelse "/bin/m4";
+
     const flex = b.dependency("flex-generated-src", .{});
 
     const exe = b.addExecutable(.{
@@ -27,7 +30,8 @@ pub fn build(b: *std.Build) void {
     exe.root_module.addCMacro("HAVE_ASSERT_H", "");
     exe.root_module.addCMacro("HAVE_LIMITS_H", "");
     exe.root_module.addCMacro("HAVE_NETINET_IN_H", "");
-    exe.root_module.addCMacro("M4", "\"m4\""); // path to default m4 binary
+
+    exe.root_module.addCMacro("M4", b.fmt("\"{}\"", .{std.zig.fmtEscapes(m4_path)})); // path to default m4 binary
 
     exe.root_module.addIncludePath(flex.path("src"));
     exe.root_module.addCSourceFile(.{ .file = flex.path("src/buf.c") });
